@@ -1,6 +1,6 @@
 # JavaScript essentials - quickref
 
-[Go back](../README.md)
+[Go back](../javascript.md)
 
 ---
 

@@ -1,6 +1,6 @@
 # C# essentials - quickref
 
-[Go back](../README.md)
+[Go back](../CSharp.md)
 
 ---
 
