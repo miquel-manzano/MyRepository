@@ -165,6 +165,3 @@
 | `CREATE VIEW`          | Crear vista                 |
 | `BEGIN/COMMIT/ROLLBACK`| Control de transacciones    |
 
----
-
-Estos conceptos son esenciales para gestionar bases de datos en PostgreSQL. ¿Te gustaría más detalle sobre algún aspecto?
