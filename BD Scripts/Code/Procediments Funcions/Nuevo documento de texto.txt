@@ -1,0 +1,198 @@
+-- 1
+
+DO $$
+DECLARE
+var_num1 NUMERIC:=:vnum1;
+var_num2 NUMERIC:=:vnum2;
+var_res NUMERIC :=1;
+BEGIN
+IF var_num1<0 OR var_num2<0 THEN
+RAISE NOTICE 'El número no pot ser negatiu!.';
+ELSE
+FOR i IN 1..var_num2 LOOP
+var_res := var_res * var_num1;
+END LOOP;
+END IF;
+RAISE NOTICE 'El resultat de la operació és: %', var_res;
+END; $$ language plpgsql;
+
+
+
+-- 2
+
+--Funció per controlar que el radi sigui positiu
+CREATE OR REPLACE FUNCTION func_checkP (par_radi NUMERIC)
+RETURNS NUMERIC LANGUAGE plpgsql AS $$
+DECLARE
+var_check NUMERIC :=0;
+BEGIN
+IF par_radi > 0 THEN
+var_check :=1;
+END IF;
+RETURN(var_check);
+END; $$;
+--Funció per calcular l’àrea en funció del radi
+CREATE OR REPLACE FUNCTION func_calculArea (par_radi NUMERIC)
+RETURNS NUMERIC LANGUAGE plpgsql AS $$
+DECLARE
+var_pi CONSTANT NUMERIC := 3.146;
+var_area NUMERIC:=0;
+var_check NUMERIC;
+BEGIN
+var_check :=func_checkP (par_radi);
+IF var_check = 1 THEN
+var_area := par_radi* par_radi* var_pi;
+
+ELSE
+RAISE NOTICE 'Recorda que el número ha de ser positiu!!!';
+END IF;
+RETURN(var_area);
+END; $$;
+--Bloc principal
+DO $$
+DECLARE
+var_radi NUMERIC:=:vradi;
+var_area NUMERIC;
+BEGIN
+var_area := func_calculArea (var_radi);
+IF var_area > 0 THEN
+RAISE NOTICE 'La àrea de la circumferència de radi: % és: %',var_radi, var_area ;
+END IF;
+END; $$ language plpgsql;
+
+
+
+
+-- 3
+
+
+--Creo la funció per aconseguir el nom del manàger, li passo el id del departament com a paràmetre
+CREATE OR REPLACE FUNCTION func_nom_manager (par_dept_id
+DEPARTMENTS.DEPARTMENT_ID %TYPE)
+--La funció retorna un tipus employees.first_name
+RETURNS EMPLOYEES.FIRST_NAME%TYPE LANGUAGE plpgsql AS $$
+--Creo una variable per guardar el nom del manager, tipus de variable ".firstname"
+DECLARE
+var_manager_name EMPLOYEES.FIRST_NAME%TYPE;
+--Comença el codi amb un select per guardar el nom del mànager del departament que passem com a paràmetre
+BEGIN
+SELECT FIRST_NAME
+--Amb el INTO guardem el valor que retorna el SELECT en la variable var_manager_name
+INTO var_manager_name
+FROM EMPLOYEES
+WHERE EMPLOYEE_ID = (SELECT MANAGER_ID FROM DEPARTMENTS WHERE
+DEPARTMENT_ID = par_dept_id);
+--Retorna el nom del mànager guardat a la variable var_nom
+RETURN var_manager_name;
+--Tanquem la funció
+END; $$;
+
+--o
+--Creo la funció per aconseguir el nom del manàger, li passo el id del departament com a paràmetre
+CREATE OR REPLACE FUNCTION func_nom_manager (par_dept_id
+DEPARTMENTS.DEPARTMENT_ID %TYPE)
+--La funció retorna un tipus employees.first_name
+RETURNS EMPLOYEES.FIRST_NAME%TYPE LANGUAGE plpgsql AS $$
+--Creo una variable per guardar el nom del manager, tipus de variable ".firstname"
+DECLARE
+var_manager_name EMPLOYEES.FIRST_NAME%TYPE;
+--Comença el codi amb un select per guardar el nom del mànager del departament que passem com a paràmetre
+BEGIN
+SELECT e.FIRST_NAME
+--Amb el INTO guardem el valor que retorna el SELECT en la variable var_manager_name
+INTO var_manager_name
+FROM EMPLOYEES e, DEPARTMENTS d
+WHERE e.EMPLOYEE_ID=d.MANAGER_ID AND d.DEPARTMENT_ID=par_dept_id;
+--Retorna el nom del mànager guardat a la variable var_nom
+RETURN var_manager_name;
+--Tanquem la funció
+END; $$;
+--Creo el bloc anònim, des d'on cridarem la funció " func_nom_manager ja creada"
+DO $$
+--Declaro la variable per recollir el valor introduit per teclat, en aquest cas el id del departament
+DECLARE
+var_num_id DEPARTMENTS.DEPARTMENT_ID %TYPE := :vnum_id;
+BEGIN
+/*Imprimim el nom del manager que ens retorna la funció "func_nom_manager"
+Fixa't que aquí cridem la funció i li passem com a paràmetre la variable on guardem el id del departament
+introduit per teclat*/
+RAISE NOTICE 'El nom del mànger és: % ', func_nom_manager(var_num_id);
+--Tanquem el bloc
+END; $$ language plpgsql;
+
+
+
+-- 4
+
+/*Creo un procediment per imprimir les dades d'un empleat. Passem el ID de l'empleat com a paràmetre del tipus
+EMPLOYEE_ID%TYPE*/
+CREATE OR REPLACE PROCEDURE proc_dades_empl(par_emp_id EMPLOYEES.EMPLOYEE_ID%TYPE)
+language plpgsql AS $$
+DECLARE
+var_dades_empl RECORD;
+BEGIN
+/*Comença el codi amb un SELECT que torna els quatre camps que demana l'enunciat amb les dades de l'empleat
+que hem passat el ID com a paràmetre*/
+SELECT e.FIRST_NAME,e.LAST_NAME ,d.DEPARTMENT_NAME ,d.LOCATION_ID
+--Amb el INTO guardem els valors que retorna el SELECT en la variable tipus registre "var_dades_empl"
+INTO var_dades_empl
+FROM EMPLOYEES e, DEPARTMENTS d
+WHERE e.DEPARTMENT_ID = d. DEPARTMENT_ID and e.EMPLOYEE_ID = par_emp_id;
+--Imprimim les dades obtingudes amb el SELECT utilitzant la variable tipus registre "var_dades_empl"
+RAISE NOTICE 'NOM: %', var_dades_empl.FIRST_NAME;
+RAISE NOTICE 'COGNOM: %', var_dades_empl.LAST_NAME;
+RAISE NOTICE 'NOM DEL DEPARTAMENT: % ', var_dades_empl.DEPARTMENT_NAME;
+RAISE NOTICE 'ID LOCALITAT DEL DEPARTAMENT:%', var_dades_empl.LOCATION_ID;
+--Tanquem el procediment
+END; $$
+--Creo el bloc anònim, des d'on cridarem el procediment "proc_dades_empl"
+DO $$
+--Declaro una variable de bloc tipus EMPLOYEE_ID%TYPE per guardar el valor introduit per teclat
+DECLARE
+var_emp EMPLOYEES.EMPLOYEE_ID%TYPE:= :vemp;
+BEGIN
+--Imprimim el text de presentació de les dades de l'empleat
+RAISE NOTICE 'LES DADES DE L`EMPLEAT AMB ID % SÓN ', var_emp;
+RAISE NOTICE ' ';
+/*Cridem el procediment "proc_dades_empl" passant com a paràmetre el valor de la variable "var_emp" per imprimir
+les dades de l'empleat.*/
+CALL proc_dades_empl(var_emp);
+END; $$
+
+
+
+-- 5
+
+CREATE OR REPLACE PROCEDURE proc_alta_pais (par_country_id COUNTRIES.COUNTRY_ID
+%TYPE, par_country_name COUNTRIES.COUNTRY_NAME%TYPE, par_region_name
+REGIONS.REGION_NAME%TYPE) language plpgsql AS $$
+DECLARE
+var_region_id REGIONS.REGION_ID%TYPE;
+var_country COUNTRIES%ROWTYPE;
+BEGIN
+SELECT REGION_ID
+INTO var_region_id
+FROM REGIONS
+WHERE REGION_NAME = par_region_name;
+INSERT INTO COUNTRIES VALUES (par_country_id, par_country_name , var_region_id);
+RAISE NOTICE 'REALITZADA ALTA DEL PAIS';
+COMMIT;
+SELECT *
+INTO var_country
+FROM COUNTRIES
+WHERE COUNTRY_ID = par_country_id;
+RAISE NOTICE 'EL NOM DEL PAIS INSERTAT ÉS: %' , var_country.COUNTRY_NAME;
+--Tanquem el procediment
+END; $$
+--Creo el bloc anònim, des d'on cridarem el procediment "proc_dades_empl"
+DO $$
+--Declaro una variable de bloc tipus EMPLOYEE_ID%TYPE per guardar el valor introduit per teclat
+DECLARE
+var_country_id COUNTRIES.COUNTRY_ID%TYPE := :vcountry_id;
+var_country_name COUNTRIES.COUNTRY_NAME%TYPE := :vcountry_name;
+var_region_name REGIONS.REGION_NAME%TYPE := :vregion_name;
+BEGIN
+/*Cridem el procediment "proc_alta_pais" .*/
+CALL proc_alta_pais (var_country_id, var_country_name,var_region_name);
+END; $$
+

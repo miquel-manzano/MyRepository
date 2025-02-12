@@ -1,0 +1,137 @@
+-- 1
+CREATE OR REPLACE FUNCTION func_comprovar_mng (par_empId EMPLOYEES.EMPLOYEE_ID
+%TYPE) RETURNS BOOLEAN language plpgsql as $$
+DECLARE
+var_empId EMPLOYEES.EMPLOYEE_ID%TYPE;
+BEGIN
+SELECT EMPLOYEE_ID
+INTO STRICT var_empId
+FROM EMPLOYEES
+WHERE EMPLOYEE_ID = par_empId;
+RETURN TRUE;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+RETURN FALSE;
+WHEN OTHERS THEN
+RAISE EXCEPTION 'ERROR GENERAL';
+END;$$;
+
+CREATE OR REPLACE FUNCTION func_comprovar_loc (par_locId LOCATIONS.LOCATION_ID
+%TYPE)
+RETURNS BOOLEAN language plpgsql as $$
+DECLARE
+var_locId LOCATIONS.LOCATION_ID%TYPE;
+BEGIN
+SELECT LOCATION_ID
+INTO STRICT var_locId
+FROM LOCATIONS
+WHERE LOCATION_ID = par_locId;
+RETURN TRUE;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+RETURN FALSE;
+WHEN OTHERS THEN
+RAISE EXCEPTION 'ERROR GENERAL';
+END;$$;
+
+CREATE OR REPLACE FUNCTION func_compv_dept(par_deptId DEPARTMENTS.DEPARTMENT_ID
+%TYPE) RETURNS BOOLEAN language plpgsql as $$
+DECLARE
+var_deptId DEPARTMENTS.DEPARTMENT_ID%TYPE;
+BEGIN
+SELECT DEPARTMENT_ID
+INTO STRICT var_deptId
+FROM DEPARTMENTS
+WHERE DEPARTMENT_ID = par_deptId;
+RETURN TRUE;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+RETURN FALSE;
+WHEN OTHERS THEN
+RAISE EXCEPTION 'ERROR GENERAL:';
+
+END;$$;
+CREATE OR REPLACE PROCEDURE proc_alta_dept
+(par_deptId DEPARTMENTS.DEPARTMENT_ID%TYPE, par_depName DEPARTMENTS.DEPARTMENT_NAME
+%TYPE, par_mngId DEPARTMENTS.MANAGER_ID%TYPE, par_locId LOCATIONS.LOCATION_ID%TYPE)
+language plpgsql AS $$
+BEGIN
+INSERT INTO DEPARTMENTS
+VALUES (par_deptId , par_depName , par_mngId, par_locId);
+COMMIT;
+END;$$;
+
+DO $$
+DECLARE
+var_depId DEPARTMENTS.DEPARTMENT_ID%TYPE := :vdepId;
+var_depName DEPARTMENTS.DEPARTMENT_NAME%TYPE := INITCAP(:vdepName);
+var_mngId DEPARTMENTS.MANAGER_ID%TYPE := :vmngId;
+var_locId LOCATIONS.LOCATION_ID%TYPE := :locId;
+var_counter INTEGER := 0;
+BEGIN
+IF (SELECT func_compv_dep(var_depId)) THEN
+RAISE NOTICE 'JA EXISTEIX EL DEPARTAMENT';
+ELSE
+var_counter= var_counter + 1;
+END IF;
+IF (SELECT func_comprovar_mng(var_mngId)) THEN
+var_counter= var_counter + 1;
+ELSE
+RAISE NOTICE 'EL MANAGER INTRODUÏT NO EXISTEIX';
+END IF;
+IF (SELECT func_comprovar_loc (var_locId )) THEN
+var_counter= var_counter + 1;
+
+ELSE
+RAISE NOTICE 'LA LOCALITZACIÓ INTRODUIDA NO EXISTEIX';
+END IF;
+IF var_counter=3 THEN
+CALL proc_alta_dept (var_depId, var_depName, var_mngId, var_locId);
+END IF;
+END;$$ language plpgsql;
+JOC DE PROVES:
+-Introduim totes les dades correctes (622,test1,120,1500) retorna:
+"REALITZADA ALTA DE DEPARTAMENT"
+-Comprovem que s'ha fet el insert correctament
+SELECT * FROM DEPARTMENTS;
+-Introduim un DEPARTMENT_ID que ja existeix (60,test2,120,1500) retorna:
+"JA EXISTEIX EL DEPARTAMENT"
+-Introduim un MANAGER_ID que no existeix (633,test3,341,1500) retorna:
+"EL MANAGER INTRODUÏT NO EXISTEIX"
+-Introduim un LOCATION_ID que no existeix (638,test4,120,4500) retorna:
+"LA LOCALITZACIÓ INTRODUIDA NO EXISTEIX"
+
+
+-- 2
+
+CREATE OR REPLACE FUNCTION func_nom_emp (par_empId EMPLOYEES.EMPLOYEE_ID%TYPE)
+RETURNS EMPLOYEES.FIRST_NAME%TYPE language plpgsql as $$
+DECLARE
+var_empName EMPLOYEES.FIRST_NAME%TYPE;
+BEGIN
+SELECT FIRST_NAME
+INTO STRICT var_empName
+FROM EMPLOYEES
+WHERE EMPLOYEE_ID = par_empId;
+RETURN var_empName;
+END;$$;
+DO $$
+DECLARE
+var_empId EMPLOYEES.EMPLOYEE_ID%TYPE := :vempId;
+BEGIN
+RAISE NOTICE 'El nom de l`empleat % és: %', var_empId,
+func_nom_emp(var_empId);
+EXCEPTION
+WHEN SQLSTATE 'P0002' THEN
+RAISE EXCEPTION 'El empleat no existeix';
+WHEN OTHERS THEN
+RAISE EXCEPTION '%,%', SQLERRM, SQLSTATE;
+
+END;$$ language plpgsql;
+
+JOC DE PROVES:
+-Introduim l'ID d'un empleat que existeixi, el 103 retorna:
+El nom de l`empleat 103 és: Alexander
+-Introduim l'ID d'un empleat que no existeixi, el 333 retorna:
+[P0001] ERROR: El empleat no existeix Where: PL/pgSQL function inline_code_block
+line 8 at RAISE
