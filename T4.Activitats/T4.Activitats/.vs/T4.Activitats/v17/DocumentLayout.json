@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{079B47B4-FB95-4101-A9C5-1D79EDB91B69}|T4.Activitats\\T4.Activitats.csproj|d:\\programacion\\myrepository\\t4.activitats\\t4.activitats\\t4.activitats\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{079B47B4-FB95-4101-A9C5-1D79EDB91B69}|T4.Activitats\\T4.Activitats.csproj|solutionrelative:t4.activitats\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BBF848-150F-4100-A209-9FE86804AFEF}|ClassLibrary\\ClassLibrary.csproj|d:\\programacion\\myrepository\\t4.activitats\\t4.activitats\\classlibrary\\pair.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BBF848-150F-4100-A209-9FE86804AFEF}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\pair.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Pair.cs",
+              "DocumentMoniker": "D:\\Programacion\\MyRepository\\T4.Activitats\\T4.Activitats\\ClassLibrary\\Pair.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\Pair.cs",
+              "ToolTip": "D:\\Programacion\\MyRepository\\T4.Activitats\\T4.Activitats\\ClassLibrary\\Pair.cs",
+              "RelativeToolTip": "ClassLibrary\\Pair.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T18:37:26.359Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,7 @@
               "RelativeDocumentMoniker": "T4.Activitats\\Program.cs",
               "ToolTip": "D:\\Programacion\\MyRepository\\T4.Activitats\\T4.Activitats\\T4.Activitats\\Program.cs",
               "RelativeToolTip": "T4.Activitats\\Program.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAD4v14AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAIwEwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-12T18:52:55.436Z",
               "EditorCaption": ""

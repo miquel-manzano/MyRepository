@@ -69,64 +69,8 @@ public class Program
         Console.WriteLine(Name1.CompareTo(Name2));
         Console.WriteLine(Name2.CompareTo(Name1));
 
-        
-        // Ex1
-        Pair<string, int> StringIntP = new Pair<string, int>("miaw", 5);
-        Pair<double, bool> DoubleBoolP = new Pair<double, bool>(99.99, true);
-        StringIntP.ShowValues();
-        DoubleBoolP.ShowValues();
 
 
-        // Ex2
-        var myArrayList = new ArrayList();
-
-        bool flag = true;
-
-        while (flag)
-        {
-            Console.WriteLine("Write value");
-            myArrayList.Add(Console.ReadLine());
-            Console.WriteLine("Exit? (y) (n) Default: (n)");
-            if (Console.ReadLine() == "y")
-            {
-                flag = false;
-            }
-        }
-        
-
-        foreach (Object obj in myArrayList)
-        {
-            Console.Write("   {0} ", obj);
-            Console.WriteLine();
-        }
-
-
-        // Ex3
-        // No pueden haver dos nombres iguales???
-        Dictionary<string, int> studentsName = new Dictionary<string, int>();
-
-        flag = true;
-        int count = 0;
-
-        while (flag)
-        {
-            count ++;
-            Console.WriteLine("Write student name:");
-            studentsName.Add(Console.ReadLine(), count);
-            Console.WriteLine("Exit? (y) (n) Default: (n)");
-            if (Console.ReadLine() == "y")
-            {
-                flag = false;
-            }
-        }
-
-        foreach (var item in studentsName)
-        {
-            Console.WriteLine($"{item.Key} {item.Value}");
-            Console.WriteLine();
-        }
-
-        
 
 
 
