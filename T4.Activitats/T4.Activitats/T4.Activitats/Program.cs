@@ -30,12 +30,12 @@ public class Program
     {
         Console.WriteLine("\r\n\r\n                                                        \r\n _____ ___      _____     _   _     _ _       _         \r\n|_   _| | |    |  _  |___| |_|_|_ _|_| |_ ___| |_ ___   \r\n  | | |_  |_   |     |  _|  _| | | | |  _| .'|  _|_ -|  \r\n  |_|   |_|_|  |__|__|___|_| |_|\\_/|_|_| |__,|_| |___|  \r\n                                                        \r\n\r\n");
 
-        /*
+        
         Notificacio myNotification;
         myNotification = MostrarMissatgeConsola;
         myNotification += MostrarMissatgeConsolaAmbEstrellas;
 
-        myNotification("miaw");*/
+        myNotification("miaw");
 
         string myMessagge = "hola";
 
@@ -43,7 +43,7 @@ public class Program
 
 
 
-        /*
+        
         Func<int, int, double> pow = (a, b) => Math.Pow(a, b);
         Console.WriteLine(pow(2, 4));
 
@@ -60,16 +60,16 @@ public class Program
 
         Action<int, int> printSuma = (a,b) => Console.WriteLine(a + b);
         printSuma(5, 5);
-        */
+        
 
-        /*
+        
         const string Name1 = "Jowi";
         const string Name2 = "Zoe";
 
         Console.WriteLine(Name1.CompareTo(Name2));
-        Console.WriteLine(Name2.CompareTo(Name1));*/
+        Console.WriteLine(Name2.CompareTo(Name1));
 
-        /*
+        
         // Ex1
         Pair<string, int> StringIntP = new Pair<string, int>("miaw", 5);
         Pair<double, bool> DoubleBoolP = new Pair<double, bool>(99.99, true);
@@ -124,9 +124,9 @@ public class Program
         {
             Console.WriteLine($"{item.Key} {item.Value}");
             Console.WriteLine();
-        }*/
+        }
 
-        /*
+        
 
 
 
@@ -177,6 +177,6 @@ public class Program
         Console.WriteLine(multiplicar(5, 3));
 
 
-         */
+         
     }
 }

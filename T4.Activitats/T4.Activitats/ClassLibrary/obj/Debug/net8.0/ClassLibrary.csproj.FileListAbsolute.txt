@@ -1,0 +1,12 @@
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\bin\Debug\net8.0\ClassLibrary.deps.json
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\bin\Debug\net8.0\ClassLibrary.dll
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\bin\Debug\net8.0\ClassLibrary.pdb
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.AssemblyInfoInputs.cache
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.AssemblyInfo.cs
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.csproj.CoreCompileInputs.cache
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.sourcelink.json
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.dll
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\refint\ClassLibrary.dll
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ClassLibrary.pdb
+D:\Programacion\MyRepository\T4.Activitats\T4.Activitats\ClassLibrary\obj\Debug\net8.0\ref\ClassLibrary.dll
