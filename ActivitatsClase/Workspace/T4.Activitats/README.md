@@ -31,3 +31,19 @@
     - Ordeni la llista en ordre descendent.
     - Filtri els nombres parells i els mostri per pantalla.
 >*File:* [Ex8.cs](./Ex8.cs)
+9. Crea un programa que:
+    - Creï un Dictionary<string, int> per emmagatzemar noms d'estudiants i les seves edats.
+    - Afegeixi els següents valors:
+        - "Marc" → 21
+        - "Laura" → 19 
+        - "Pau" → 22
+    - Mostri el diccionari per pantalla.
+    - Pregunti a l’usuari un nom i indiqui si existeix en el diccionari.
+    - Si el nom hi és, mostri la seva edat.
+    - Esborri "Laura" del diccionari.
+    - Iteri per totes les entrades i les mostri per pantalla.
+>*File:* [Ex9.cs](./Ex9.cs)
+10. Implementa un mètode que demani dues dates i aquest retorni si la segona data és posterior a la primera data. Nota: l’usuari ha d’introduir la data en format enter (dd, mm, yyyy).
+>*File:* [Ex10.cs](./Ex10.cs)
+11. Implementa un mètode que retorni el dia de la setmana de la data de sistema (data actual).
+>*File:* [Ex11.cs](./Ex11.cs)
