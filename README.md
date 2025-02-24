@@ -1,5 +1,10 @@
 # MyRepository
 
+## ![Refsheets](./Refsheets/)
+Chuletas/apunts dels diferents llenguatges.
+
+---
+
 ## ![T1.Activitats](./ActivitatsClase/Workspace/T1.Activitats/T1.%20Activitats%20-%20Solucions%20G2.md)
 Activitats d'introduccio a la programacio. [Work on progress]
 
