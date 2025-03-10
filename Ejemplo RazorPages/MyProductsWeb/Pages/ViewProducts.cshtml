@@ -1,0 +1,31 @@
+﻿@page
+@model MyProductsWeb.Pages.ViewProductsModel
+@{
+	ViewData["Title"] = "Products";
+}
+<h1>Products List</h1>
+<br />
+
+<p>@Model.FileErrorMessage</p>
+<table class="table">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>Amount</td>
+			<td>Price</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var p in Model.Products)
+		{
+			<tr>
+				<td>@p.Id</td>
+				<td>@p.Name</td>
+				<td>@p.Amount</td>
+				<td>@p.Price</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<a asp-page="/AddProduct" class="btn btn-primary">Add Product</a>

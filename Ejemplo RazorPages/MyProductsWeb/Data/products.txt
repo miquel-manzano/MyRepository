@@ -1,0 +1,6 @@
+1|Nintendo Switch|250|349.99
+2|Play Station 2|125|238.99
+3|Wii|25|130.00
+4|Xbox Series X|10|500.00
+5|Steam Deck|50|800.002
+6|Waaaa|4|536
